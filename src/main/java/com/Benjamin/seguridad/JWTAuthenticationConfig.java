@@ -1,5 +1,6 @@
 package com.Benjamin.seguridad;
 
+import com.Benjamin.modelo.Rol;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.context.annotation.Configuration;
@@ -18,19 +19,21 @@ import static com.Benjamin.seguridad.Constans.getSigningKey;
 @Configuration
 public class JWTAuthenticationConfig {
 
-    public String getJWTToken(String username) {
+    public String getJWTToken(String username, Rol rol) {
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                .commaSeparatedStringToAuthorityList("ROLE_USER");
+                .commaSeparatedStringToAuthorityList("ROLE_" + rol.toString());
 
         String token = Jwts
                 .builder()
                 .setId("espinozajgeJWT")
                 .setSubject(username)
-                .claim("authorities", grantedAuthorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .claim("authorities",
+                        grantedAuthorities.stream()
+                                .map(GrantedAuthority::getAuthority)
+                                .collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
-                .signWith(getSigningKey(SUPER_SECRET_KEY), SignatureAlgorithm.HS512)
-                .compact();
+                .signWith(getSigningKey(SUPER_SECRET_KEY), SignatureAlgorithm.HS512).compact();
 
         return TOKEN_BEARER_PREFIX + token;
     }
