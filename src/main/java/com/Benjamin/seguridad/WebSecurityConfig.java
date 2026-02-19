@@ -24,7 +24,10 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(HttpMethod.POST, Constans.LOGIN_URL).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/contactos").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/contactos/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/contactos/**").hasAuthority("ROLE_" + Rol.ADMIN)
+                        .requestMatchers(HttpMethod.GET, "/contactos").authenticated()
                         .anyRequest().authenticated())
                 .addFilterAfter(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
