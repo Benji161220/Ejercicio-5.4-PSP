@@ -13,7 +13,8 @@ public class UsuarioRepository {
     public List<Usuario> getUsuarios() {
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
         usuarios.add(new Usuario("aitor", PasswordEncryptor.encrypt("1234"), Rol.ADMIN));
-        usuarios.add(new Usuario("alicia", PasswordEncryptor.encrypt("1111"), Rol.USER));
+        usuarios.add(new Usuario("alicia", PasswordEncryptor.encrypt("1111"), Rol.MOD));
+        usuarios.add(new Usuario("pepe", PasswordEncryptor.encrypt("2222"), Rol.USER));
         return usuarios;
     }
 }

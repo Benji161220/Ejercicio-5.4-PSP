@@ -2,6 +2,7 @@ package com.Benjamin.modelo;
 
 public enum Rol {
     ADMIN("ADMIN"),
+    MOD("MOD"),
     USER("USER");
 
     private final String rol;
