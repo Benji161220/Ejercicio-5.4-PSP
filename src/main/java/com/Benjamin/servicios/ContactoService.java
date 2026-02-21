@@ -36,7 +36,8 @@ public class ContactoService {
     }
 
 
-    public void borrarContacto(Long id) {
+
+    public void eliminarContacto(int id) {
         contactoRepository.eliminar(id);
     }
 }

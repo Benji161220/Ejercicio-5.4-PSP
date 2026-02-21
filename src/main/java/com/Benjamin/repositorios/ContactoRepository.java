@@ -34,7 +34,7 @@ public class ContactoRepository {
         return contacto;
     }
 
-    public boolean eliminar(Long id) {
+    public boolean eliminar(int id) {
         for (int i = 0; i < contactos.size(); i++) {
             if (contactos.get(i).getId() == id) {
                 contactos.remove(i);
